@@ -33,3 +33,6 @@ Route::get('/retrieve', function () {
 Route::get('/send-email', function() {
     Mail::to('samit@itgeniussite.dev')->send(new TestMail);
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
