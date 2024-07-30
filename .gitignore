@@ -1,6 +1,8 @@
 src/node_modules
+frontend/node_modules
+mysql/data
 src/public/hot
-src/srcpublic/storage
+src/public/storage
 src/storage/*.key
 src/vendor
 src/.env
@@ -11,5 +13,3 @@ src/Homestead.json
 src/Homestead.yaml
 src/npm-debug.log
 src/yarn-error.log
-/.idea
-/.vscode

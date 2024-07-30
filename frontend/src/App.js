@@ -1,0 +1,98 @@
+import axios from 'axios'
+import { useState, useEffect } from "react"
+
+const baseUrl = "http://localhost:8100/api/products"
+
+function App() {
+  const [products, setProducts] = useState(null)
+
+  useEffect(() => {
+    const token = "2|2tqIViB4Z7P52Dn39DzmCzkyjDx9sRmpfXcpdtVH"
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    }
+
+    axios.get(baseUrl, config).then((response) => {
+      setProducts(response.data)
+    })
+  }, [])
+
+  console.table(products)
+
+  if(!products) return null
+
+  return (
+    <div>
+      <h1>Product List ({products.length})</h1>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Slug</th>
+            <th>Price</th>
+            <th>CreatedDate</th>
+            <th>ModifiedDate</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            products.map(element => {
+              return (
+                <tr key={element.id}>
+                  <td>{element.id}</td>
+                  <td>{element.name}</td>
+                  <td>{element.slug}</td>
+                  <td>{element.price}</td>
+                  <td>{element.created_at}</td>
+                  <td>{element.updated_at}</td>
+                </tr>
+              )
+            })
+          }
+        </tbody>
+      </table>
+    </div>
+  )
+
+  /*
+  return (
+    <>
+     <h1>Product List ({products.length})</h1>
+     <table border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>ProductName</th>
+          <th>UnitPrice</th>
+          <th>UnitInStock</th>
+          <th>CreatedDate</th>
+          <th>ModifiedDate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          products.map(element => {
+            return (
+              <tr key={element.id}>
+                <td>{element.id}</td>
+                <td><img src={element.ProductPicture} width="100" alt="" /></td>
+                <td>{element.ProductName}</td>
+                <td>{element.UnitPrice}</td>
+                <td>{element.UnitInStock}</td>
+                <td>{element.CreatedDate}</td>
+                <td>{element.ModifiedDate}</td>
+              </tr>
+            )
+          })
+        }
+      </tbody>
+     </table>
+    </>
+  )
+  */
+}
+
+
+export default App;

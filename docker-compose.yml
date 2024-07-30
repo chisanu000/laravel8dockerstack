@@ -90,3 +90,21 @@ services:
     tty: true
     networks:
       - web_network
+
+  # React App Service
+  reactapp:
+    build:
+      context: frontend/
+      dockerfile: Dockerfile
+    image: react-app
+    container_name: react_app
+    volumes:
+      - /usr/app/node_modules
+      - ./frontend:/usr/app
+    ports:
+      - "8181:80"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    restart: always
+    networks:
+      - web_network
